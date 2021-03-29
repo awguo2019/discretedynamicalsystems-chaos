@@ -14,8 +14,11 @@ import operator
 # seed random number generator
 seed(1)
 
+#number of iterates
+numiterates = 100000;
+
 #array storing iterates of chaos game
-iterates = np.zeros((10000, 2)); 
+iterates = np.zeros((numiterates, 2)); 
 
 #transformation matrix
 transform = np.array([[1/3, 0],
@@ -38,7 +41,7 @@ num_points = np.shape(points)[0];
 iterates[0] = (0.5, 0.5); 
 
 #iterate 5000 times, starting at (0,0)
-for i in range(1, 10000): 
+for i in range(1, numiterates): 
     #choose random point to move towards
     rand = randint(0, num_points-1); 
    #get difference of prev iterate and attracting point
@@ -51,7 +54,7 @@ for i in range(1, 10000):
     iterates[i] = (x,y); 
 
 #make scatterplot w columns being axes
-plt.scatter(iterates[:,0], iterates[:,1]);
+plt.scatter(iterates[:,0], iterates[:,1], s = 1);
 plt.show();
 
     
