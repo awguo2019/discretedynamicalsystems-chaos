@@ -14,29 +14,44 @@ import operator
 # seed random number generator
 seed(1)
 
-iterates = np.zeros((10000, 2)); #array storing iterates of chaos game
+#array storing iterates of chaos game
+iterates = np.zeros((10000, 2)); 
 
-transform = np.array([[1/3, 0],[0, 1/3]]); #transformation matrix
+#transformation matrix
+transform = np.array([[1/3, 0],
+                      [0, 1/3]]); 
 
-points = np.array([[0, 1], [1, 0], [0,0], [1,1], [0.5, 1], [1, 0.5], [0.5, 0], [0,0.5]]); #array storing attracting points
-num_points = np.shape(points)[0]; #number of attracting points
+#array storing attracting points
+points = np.array([[0, 1], 
+                   [1, 0], 
+                   [0,0], 
+                   [1,1], 
+                   [0.5, 1], 
+                   [1, 0.5], 
+                   [0.5, 0], 
+                   [0,0.5]]); 
 
-iterates[0] = (0.5, 0.5); #set the starting point
+#number of attracting points
+num_points = np.shape(points)[0]; 
 
-for i in range(1, 10000): #iterate 5000 times, starting at (0,0)
-    
-    rand = randint(0, num_points-1); #choose random point to move towards
-   
-    (x, y) = tuple(map(operator.sub, iterates[i-1], points[rand])); #get difference of prev iterate and attracting point
+#set the starting point
+iterates[0] = (0.5, 0.5); 
 
-    (x, y) = np.matmul(transform, (x,y)); #multiply difference w transform matrix
+#iterate 5000 times, starting at (0,0)
+for i in range(1, 10000): 
+    #choose random point to move towards
+    rand = randint(0, num_points-1); 
+   #get difference of prev iterate and attracting point
+    (x, y) = tuple(map(operator.sub, iterates[i-1], points[rand])); 
+    #multiply difference w transform matrix
+    (x, y) = np.matmul(transform, (x,y)); 
+    #add the attracting point
+    (x, y) = tuple(map(operator.add, (x,y), points[rand]));  
+    #set iterates[i] equal to our x,y
+    iterates[i] = (x,y); 
 
-    (x, y) = tuple(map(operator.add, (x,y), points[rand])); #add the attracting point 
-    
-    iterates[i] = (x,y); #set iterates[i] equal to our x,y
-
-
-plt.scatter(iterates[:,0], iterates[:,1]); #make scatterplot w columns being axes
+#make scatterplot w columns being axes
+plt.scatter(iterates[:,0], iterates[:,1]);
 plt.show();
 
     
