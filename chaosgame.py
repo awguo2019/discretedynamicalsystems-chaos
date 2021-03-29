@@ -25,20 +25,16 @@ transform = np.array([[1/3, 0],
                       [0, 1/3]]); 
 
 #array storing attracting points
-points = np.array([[0, 1], 
-                   [1, 0], 
-                   [0,0], 
-                   [1,1], 
-                   [0.5, 1], 
-                   [1, 0.5], 
-                   [0.5, 0], 
-                   [0,0.5]]); 
+points = np.array([[1, 0.5],  
+                   [0.5,0],
+                   [0, 0.5],
+                   [0.5, 1]]); 
 
 #number of attracting points
 num_points = np.shape(points)[0]; 
 
 #set the starting point
-iterates[0] = (0.5, 0.5); 
+iterates[0] = (.5, 0.5); 
 
 #iterate 5000 times, starting at (0,0)
 for i in range(1, numiterates): 
@@ -53,8 +49,8 @@ for i in range(1, numiterates):
     #set iterates[i] equal to our x,y
     iterates[i] = (x,y); 
 
-#make scatterplot w columns being axes
-plt.scatter(iterates[:,0], iterates[:,1], s = 1);
+#make scatterplot w columns being axes (skips the first 12 points)
+plt.scatter(iterates[12:,0], iterates[12:,1], s = 1);
 plt.show();
 
     
